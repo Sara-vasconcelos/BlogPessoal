@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.blogpessoal.model.Postagem;
 import com.example.blogpessoal.repository.PostagemRepository;
+import com.example.blogpessoal.repository.TemaRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
@@ -34,6 +35,9 @@ public class PostagemController {                  // allowedHeaders , libera a 
 	@Autowired //injeção de dependencia, é a mesma coisa de instanciar a classe PostagemRepository. Como estou fazendo isso , toda vez que eu quiser usar a PostagemRepository eu chamo esse Autowired
 	private PostagemRepository postagemRepository;  //A primeira Postagem , é a classe que estou instanciado , e a segundo é o nome do objeto.
 
+	@Autowired
+	private TemaRepository temaRepository;
+	
 	//LISTA todas as postagens
 
 	@GetMapping //Verbo HTTP
@@ -89,10 +93,12 @@ public class PostagemController {                  // allowedHeaders , libera a 
 	
 	@PostMapping //cria uma requisição
 	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){
+		if(temaRepository.existsById(postagem.getTema().getId()))
 		//status(HttpStatus.CREATED: Vai informar em formato Http que foi criado a postagem
-		return ResponseEntity.status(HttpStatus.CREATED)
+		return ResponseEntity.status(HttpStatus.CREATED)//retorna que foi criado no botão
 				.body(postagemRepository.save(postagem));//save : metodo da repository , que vai fazer um INSERT INTO , e mostrar , ou seja , ele salva a postagem e retorna a mesma , então nesse caso o ResponseEntity tem um corpo
 		
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!", null);
 		//TESTANDO:
 		//no INSOMNIA depois de colocar o método Post , e o endereço do link , clico em BODY e seleciono JSON
 		//depois entre {} eu coloco os parametros que quero receber , como o id é auto increment , não precisa 
@@ -129,10 +135,19 @@ public class PostagemController {                  // allowedHeaders , libera a 
 	 
 	@PutMapping //altera e atualiza
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
-		return postagemRepository.findById(postagem.getId())//está buscando um id (FindByAll) , e vai buscar pelo id que eu passar (postagem.id)
-				.map(resposta-> ResponseEntity.status(HttpStatus.OK)//caso eu encontre o id mencionado ele vai mapear , e retornar um status de ok 
-				.body(postagemRepository.save(postagem)))//vai salvar a alteração ,e retornar um  corpo que no caso é postagem
-				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());//caso não encontre o id passado , cai nesse orElse, e retorna um status NOT FOUND(Não encontrado) , e não vai ter corpo somente a mensagem (build)
+		if(postagemRepository.existsById(postagem.getId())) {
+			if(temaRepository.existsById(postagem.getTema().getId()))
+				return ResponseEntity.status(HttpStatus.OK)
+						.body(postagemRepository.save(postagem));
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!", null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		
+//		return postagemRepository.findById(postagem.getId())//está buscando um id (FindByAll) , e vai buscar pelo id que eu passar (postagem.id)
+//				.map(resposta-> ResponseEntity.status(HttpStatus.OK)//caso eu encontre o id mencionado ele vai mapear , e retornar um status de ok 
+//				.body(postagemRepository.save(postagem)))//vai salvar a alteração ,e retornar um  corpo que no caso é postagem
+//				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());//caso não encontre o id passado , cai nesse orElse, e retorna um status NOT FOUND(Não encontrado) , e não vai ter corpo somente a mensagem (build)
 	}
 	
 	//DELETAR postagem
