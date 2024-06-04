@@ -98,7 +98,7 @@ public class PostagemController {                  // allowedHeaders , libera a 
 		return ResponseEntity.status(HttpStatus.CREATED)//retorna que foi criado no botão
 				.body(postagemRepository.save(postagem));//save : metodo da repository , que vai fazer um INSERT INTO , e mostrar , ou seja , ele salva a postagem e retorna a mesma , então nesse caso o ResponseEntity tem um corpo
 		
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!", null);
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!", null);//caso eu cadastrar um tema que não existe
 		//TESTANDO:
 		//no INSOMNIA depois de colocar o método Post , e o endereço do link , clico em BODY e seleciono JSON
 		//depois entre {} eu coloco os parametros que quero receber , como o id é auto increment , não precisa 
@@ -135,14 +135,14 @@ public class PostagemController {                  // allowedHeaders , libera a 
 	 
 	@PutMapping //altera e atualiza
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
-		if(postagemRepository.existsById(postagem.getId())) {
-			if(temaRepository.existsById(postagem.getTema().getId()))
+		if(postagemRepository.existsById(postagem.getId())) {//verifica se a postagem existe 
+			if(temaRepository.existsById(postagem.getTema().getId()))//verifica se o tema também existe
 				return ResponseEntity.status(HttpStatus.OK)
-						.body(postagemRepository.save(postagem));
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!", null);
+						.body(postagemRepository.save(postagem));//salva
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!", null);// caso eu queira cadastrar um tema que não existe
 		}
 		
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();//caso não encontre a postagem 
 		
 //		return postagemRepository.findById(postagem.getId())//está buscando um id (FindByAll) , e vai buscar pelo id que eu passar (postagem.id)
 //				.map(resposta-> ResponseEntity.status(HttpStatus.OK)//caso eu encontre o id mencionado ele vai mapear , e retornar um status de ok 

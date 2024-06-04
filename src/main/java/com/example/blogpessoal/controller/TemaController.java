@@ -84,22 +84,22 @@ public class TemaController {
 	  //ATUALIZAR 
 	    @PutMapping
 	    public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema){
-	        return temaRepository.findById(tema.getId())
-	            .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
+	        return temaRepository.findById(tema.getId())//faz a busca
+	            .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)//atualiza 
 	            .body(temaRepository.save(tema)))
-	            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());//retorna Not found caso não encontre
 	    }
 	    
 	  //DELETAR
 	    
-	    @ResponseStatus(HttpStatus.NO_CONTENT)
+	    @ResponseStatus(HttpStatus.NO_CONTENT)//mensagem em formato HTTP , que aparece no botão do insomnia 
 	    @DeleteMapping("/{id}")
 	    public void delete(@PathVariable Long id) {
-	        Optional<Tema> tema = temaRepository.findById(id);
+	        Optional<Tema> tema = temaRepository.findById(id);//verifica se existe
 	        
-	        if(tema.isEmpty())
-	            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	        if(tema.isEmpty())//verifica se existe
+	            throw new ResponseStatusException(HttpStatus.NOT_FOUND);//caso não encontre
 	        
-	        temaRepository.deleteById(id);              
+	        temaRepository.deleteById(id); //deleta com o id solicitado             
 	    }
 }

@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,6 +45,12 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")// indica que uma parte do JSON será ignorado, impede que um looping seja criado
 	private Tema tema;//Será criado um Objeto da Classe Tema, que receberá os dados do Tema associado ao Objeto da Classe Postagem. Este Objeto representa a Chave Estrangeira da Tabela tb_postagens (tema_id).
 
+	//relacionamento
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private usuario usuario;
+	
 	public Long getId() {
 		return id;
 	}
@@ -82,6 +89,14 @@ public class Postagem {
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
+	}
+
+	public usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(usuario usuario) {
+		this.usuario = usuario;
 	}
 
 
