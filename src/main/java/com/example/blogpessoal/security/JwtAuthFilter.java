@@ -41,7 +41,7 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 				FilterChain filterChain) throws ServletException, IOException {
 		
-			String authHeader = request.getHeader("Autorization");//String que monta parte do Header para conseguir trabalhar ,informando ao isominia que o token vem via header com a nomenclatura "Authorization"
+			String authHeader = request.getHeader("Authorization");//String que monta parte do Header para conseguir trabalhar ,informando ao isominia que o token vem via header com a nomenclatura "Authorization"
 			String token = null; //está como null porque ainda não tenho essa informação , pois que ainda será informado
 			String username = null;
 			
