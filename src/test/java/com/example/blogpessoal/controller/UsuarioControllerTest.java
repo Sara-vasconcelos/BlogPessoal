@@ -21,7 +21,7 @@ import com.example.blogpessoal.repository.UsuarioRepository;
 import com.example.blogpessoal.service.UsuarioService;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)//vai jogar uma porta aleatória para rodar , que não seja a mesma em que a API esteja rodando
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)// Roda a classe inteira de uma vez , ciclo de vida é pela classe , ele considera que será executado todos os métodos em uma só classe de uma vez 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)// Roda a classe inteira de uma vez , ciclo de vida é pela classe , ele considera que será executado todos os métodos em uma só classe de uma vez , mas posso executar separadamente
 public class UsuarioControllerTest {
 
 	
@@ -39,7 +39,7 @@ public class UsuarioControllerTest {
 void start() { //void : sem retorno
 	
 	
-	usuarioRepository.deleteAll(); //antes de começar vai no banco de dados e deleta tudo que tem lá antes de rodar
+	usuarioRepository.deleteAll(); //antes de começar vai no banco de dados e deleta tudo que tem lá antes de rodar, no caso o banco de dados H2 , não é o MySQL
 	
 	usuarioService.cadastrarUsuario(new usuario(0L, "Root","root@root.com", "rootroot", " "));//cria um novo usuário sempre. Depois que apagar tudo ele garante que seja criado um usuario para testar
 //0L : é o campo do id , L porque é long , e 0 porque é padrão , e como ele é increment o primeiro que for criado será com o id 1 
