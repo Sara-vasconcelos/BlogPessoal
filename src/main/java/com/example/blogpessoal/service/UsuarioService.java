@@ -36,7 +36,7 @@ public class UsuarioService {
 	public Optional<usuario>cadastrarUsuario(com.example.blogpessoal.model.usuario usuario){
 	//temos : nome | usuario(email) | senha |foto
 		if(usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())//verifica se o usuario(email)existe
-			return Optional.empty();//verifica se está vazio
+			return Optional.empty();//retorna um usuário vazio, caso já tenha um usuário com o mesmo email , e isso dá um erro 
 		
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));//senha que o usuario digitou está sendo criptografia
 		return Optional.of(usuarioRepository.save(usuario));//salva informações 

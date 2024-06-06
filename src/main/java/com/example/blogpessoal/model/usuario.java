@@ -49,6 +49,18 @@ public class usuario {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+	
+	
+//esse objeto construtor está sendo usado apenas para fazer os testes
+	public usuario(Long id, String nome,String usuario, String senha,String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+	
+	public usuario() { }; //construtor vazio // esse também está sendo usado para os testes
 
 	public Long getId() {
 		return id;

@@ -84,7 +84,7 @@ public class BasicSecurityConfig {
     	//criar outro requestMatchers pro getall e dar um permit all
     	http
 	        .authorizeHttpRequests((auth) -> auth
-	                .requestMatchers("/usuarios/logar").permitAll()//primeiro eu coloquei as rotas usuario e logar para permitir que todos os usuarios consigam acessar sem logar
+	                .requestMatchers("/usuarios/logar").permitAll()//primeiro eu coloquei as rotas usuario e logar para permitir que todos os usuarios consigam acessar sem logar	               
 	                .requestMatchers("/usuarios/cadastrar").permitAll()//liberando as rotas usuarios e cadastrar permitindo acesso ao cadastro
 	                .requestMatchers("/error/**").permitAll()//permitindo acesso aos erros
 	                .requestMatchers(HttpMethod.OPTIONS).permitAll()//permitindo os metodos http
@@ -93,7 +93,12 @@ public class BasicSecurityConfig {
 	        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
 	        .httpBasic(withDefaults());
 
-		return http.build();//retorna o corpo do erro http
+    	
+//    	.requestMatchers(HttpMethod.GET,"/produtos").permitAll() - Esse eu usaria caso eu queira que qualquer método GET que tenha o caminho /produtos 
+//        .requestMatchers(HttpMethod.GET,"/produtos/**").permitAll() - Esse libera somente os GET , que tem o caminho end point /produtos que tenha qualquer coisa depois por isso (**)
+//        .requestMatchers(HttpMethod.GET,"/categorias").permitAll() - Esse libera somente os métodos GET , que possuem o end point /categorias , sendo assim o usuário consegue buscar e ver categorias
+//        .requestMatchers(HttpMethod.GET,"/categorias/**").permitAll() -- Permite o acesso de todos os GET , com o end point /categorias e que tenha qualquer coisa depois
+		return http.build();//retorna o corpo do erro http 
 
     }
 	

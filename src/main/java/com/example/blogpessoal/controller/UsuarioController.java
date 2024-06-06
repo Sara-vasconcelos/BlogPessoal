@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.blogpessoal.model.Tema;
 import com.example.blogpessoal.model.UsuarioLogin;
 import com.example.blogpessoal.model.usuario;
 import com.example.blogpessoal.repository.UsuarioRepository;
@@ -39,6 +40,9 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioRepository.findAll());
 		
 	}
+	
+	
+	
 
 	@GetMapping("/{id}")
 	public ResponseEntity<usuario> getById(@PathVariable Long id) {
