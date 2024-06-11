@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.blogpessoal.model.Tema;
 
-public interface TemaRepository extends JpaRepository<Tema, Long>{
+public interface TemaRepository extends JpaRepository<Tema, Long>{ //esta extendendo a jpa pq é ela que tem acesso ao banco de dados
 	//seria como se fosse isso : SELECT * FROM tb_temass WHERE descricao LIKE "%descricao%";
 	//find: Select
 	//all: *

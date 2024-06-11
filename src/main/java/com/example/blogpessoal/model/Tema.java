@@ -45,7 +45,7 @@ public class Tema {
 	//CascadeType.REMOVE: Se eu apagar o tema a postagem é apagada também, por isso em cascata 
 	// @JsonIgnoreProperties: Evita 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy =  "tema" , cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("tema")//evita criar um loop
+	@JsonIgnoreProperties("tema")//evita criar um loop //ignora sempre o cara que eu estou criando
 	private List<Postagem> postagem;// terá uma Collection List contendo Objetos da Classe Postagem
 	//postagem , nome do objeto 
 

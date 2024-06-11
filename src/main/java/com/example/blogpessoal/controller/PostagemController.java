@@ -31,7 +31,8 @@ import jakarta.validation.constraints.Size;
 @CrossOrigin(origins = "*", allowedHeaders = "*") //libera o acesso a outras maquinas, o * indica que qualquer máquina pode acessar / allowedHeaders = liberar passagem de parametros no header
 public class PostagemController {                  // allowedHeaders , libera a passagem de parametros no header 
 
-	
+	//injeção de dependencia seria quase a mesma coisa de instanciar , mas não estou criando um novo objetos
+	//a partir do momento que eu chamar postagemRepository , eu vou aplicar os métodos que tem dentro da Repository , isso é uma injeção de dependencia
 	@Autowired //injeção de dependencia, é a mesma coisa de instanciar a classe PostagemRepository. Como estou fazendo isso , toda vez que eu quiser usar a PostagemRepository eu chamo esse Autowired
 	private PostagemRepository postagemRepository;  //A primeira Postagem , é a classe que estou instanciado , e a segundo é o nome do objeto.
 

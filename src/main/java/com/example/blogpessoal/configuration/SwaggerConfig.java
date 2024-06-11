@@ -20,12 +20,12 @@ public class SwaggerConfig {
 		
 		return new OpenAPI()
 				.info(new Info()
-						.title("Projeto Blog Pesoal da Sara Vasconcelos")
+						.title("Projeto Blog Pessoal da Sara Vasconcelos")
 						.description("Projeto Blog Pessoal desenvolvido por Sara Vasconcelos Freitas Souza durante o Bootcamp FullStack da Generation Brasil") //descrição depois posso colocar mais coisa
 						.version("v0.0.1")
 						.license(new License()
 								.name("PDF da Documentação")
-								.url("https://github.com/Sara-vasconcelos/BlogPessoal/blob/main/Projeto%20Blog%20Pesoal%20da%20Sara%20Vasconcelos%20documenta%C3%A7%C3%A3o.pdf"))// colocar o link do pdf depois 
+								.url(""))// colocar o link do pdf depois 
 						.contact(new Contact()
 								.name("Sara Vasconcelos Freitas Souza - Meu Linkedin")//nome de quem desenvolveu ou a empresa
 								.url("https://www.linkedin.com/in/sara-vasconcelos-freitas-souza/")//link de alguma coisa
