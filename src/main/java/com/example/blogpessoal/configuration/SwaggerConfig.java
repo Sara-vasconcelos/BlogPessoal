@@ -25,7 +25,7 @@ public class SwaggerConfig {
 						.version("v0.0.1")
 						.license(new License()
 								.name("PDF da Documentação")
-								.url(""))// colocar o link do pdf depois 
+								.url("https://github.com/Sara-vasconcelos/BlogPessoal/commit/3f510c8a8b99d43d8fcdf50da042fca536ea5b45"))// colocar o link do pdf depois 
 						.contact(new Contact()
 								.name("Sara Vasconcelos Freitas Souza - Meu Linkedin")//nome de quem desenvolveu ou a empresa
 								.url("https://www.linkedin.com/in/sara-vasconcelos-freitas-souza/")//link de alguma coisa
